@@ -1,0 +1,382 @@
+■NGパターン（Client-Timeout(20sec) < down-after-milliseconds(30sec)）
+＜クライアントサイド＞
+[ec2-user@ip-172-30-2-184 ~]$ java -jar redisfailoversample2-0.0.1-SNAPSHOT.jar
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.1.RELEASE)
+
+2020-07-07 13:42:01.343  INFO 5046 --- [           main] c.e.d.Redisfailoversample2Application    : Starting Redisfailoversample2Application on ip-172-30-2-184.ap-northeast-1.compute.internal with PID 5046 (/home/ec2-user/redisfailoversample2-0.0.1-SNAPSHOT.jar started by ec2-user in /home/ec2-user)
+2020-07-07 13:42:01.355  INFO 5046 --- [           main] c.e.d.Redisfailoversample2Application    : No active profile set, falling back to default profiles: default
+2020-07-07 13:42:02.660  INFO 5046 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-07-07 13:42:02.664  INFO 5046 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-07-07 13:42:02.739  INFO 5046 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31ms. Found 0 Redis repository interfaces.
+2020-07-07 13:42:04.429  INFO 5046 --- [           main] c.e.d.Redisfailoversample2Application    : Started Redisfailoversample2Application in 4.156 seconds (JVM running for 5.304)
+operation succeeded.
+Connection timeout = 20000
+Command timeout = PT20S
+operation succeeded.
+Connection timeout = 20000
+Command timeout = PT20S
+operation succeeded.
+Connection timeout = 20000
+Command timeout = PT20S
+operation succeeded.
+Connection timeout = 20000
+Command timeout = PT20S
+2020-07-07 13:42:23.649  INFO 5046 --- [xecutorLoop-1-2] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was /172.30.2.184:6379
+2020-07-07 13:42:23.675  WARN 5046 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:42:32.747  INFO 5046 --- [xecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was 172.30.2.184:6379
+2020-07-07 13:42:32.754  WARN 5046 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:42:41.047  INFO 5046 --- [xecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was 172.30.2.184:6379
+2020-07-07 13:42:41.055  WARN 5046 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:42:45.254  INFO 5046 --- [           main] ConditionEvaluationReportLoggingListener :
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-07-07 13:42:45.271 ERROR 5046 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+        at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:798) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:779) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at com.example.demo.Redisfailoversample2Application.main(Redisfailoversample2Application.java:10) ~[classes!/:na]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+        at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) ~[redisfailoversample2-0.0.1-SNAPSHOT.jar:na]
+        at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) ~[redisfailoversample2-0.0.1-SNAPSHOT.jar:na]
+        at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) ~[redisfailoversample2-0.0.1-SNAPSHOT.jar:na]
+        at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) ~[redisfailoversample2-0.0.1-SNAPSHOT.jar:na]
+Caused by: org.springframework.dao.QueryTimeoutException: Redis command timed out; nested exception is io.lettuce.core.RedisCommandTimeoutException: Command timed out after 20 second(s)
+        at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:70) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:273) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.convertLettuceAccessException(LettuceStringCommands.java:799) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:148) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.DefaultedRedisConnection.set(DefaultedRedisConnection.java:287) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.connection.DefaultStringRedisConnection.set(DefaultStringRedisConnection.java:973) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.DefaultValueOperations$3.inRedis(DefaultValueOperations.java:240) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.AbstractOperations$ValueDeserializingRedisCallback.doInRedis(AbstractOperations.java:60) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:228) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:188) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:96) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        at com.example.demo.Runner.run(Runner.java:21) ~[classes!/:na]
+        at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:795) ~[spring-boot-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        ... 13 common frames omitted
+Caused by: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 20 second(s)
+        at io.lettuce.core.ExceptionFactory.createTimeoutException(ExceptionFactory.java:51) ~[lettuce-core-5.3.1.RELEASE.jar!/:5.3.1.RELEASE]
+        at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:120) ~[lettuce-core-5.3.1.RELEASE.jar!/:5.3.1.RELEASE]
+        at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.3.1.RELEASE.jar!/:5.3.1.RELEASE]
+        at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.3.1.RELEASE.jar!/:5.3.1.RELEASE]
+        at com.sun.proxy.$Proxy45.set(Unknown Source) ~[na:na]
+        at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:146) ~[spring-data-redis-2.3.1.RELEASE.jar!/:2.3.1.RELEASE]
+        ... 23 common frames omitted
+
+[ec2-user@ip-172-30-2-184 ~]$
+
+■OKパターン（Client-Timeout(60sec) < down-after-milliseconds(30sec)）
+＜サーバサイド＞
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6379 info replication
+# Replication
+role:master
+connected_slaves:2
+slave0:ip=172.30.2.184,port=6381,state=online,offset=207112,lag=0
+slave1:ip=172.30.2.184,port=6380,state=online,offset=207112,lag=0
+master_replid:3871e09c446a3f35b3769590db628947ce5bf289
+master_replid2:955d9493956d790490f887660ac5af341dda3689
+master_repl_offset:207251
+second_repl_offset:134827
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:124533
+repl_backlog_histlen:82719
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6380 info replication
+# Replication
+role:slave
+master_host:172.30.2.184
+master_port:6379
+master_link_status:up
+master_last_io_seconds_ago:1
+master_sync_in_progress:0
+slave_repl_offset:207562
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:3871e09c446a3f35b3769590db628947ce5bf289
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:207562
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:177401
+repl_backlog_histlen:30162
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6381 info replication
+# Replication
+role:slave
+master_host:172.30.2.184
+master_port:6379
+master_link_status:up
+master_last_io_seconds_ago:0
+master_sync_in_progress:0
+slave_repl_offset:208165
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:3871e09c446a3f35b3769590db628947ce5bf289
+master_replid2:955d9493956d790490f887660ac5af341dda3689
+master_repl_offset:208165
+second_repl_offset:134827
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1206
+repl_backlog_histlen:206960
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6379 shutdown
+5079:M 07 Jul 2020 13:54:12.915 # User requested shutdown...
+5079:M 07 Jul 2020 13:54:12.915 * Saving the final RDB snapshot before exiting.
+5079:M 07 Jul 2020 13:54:12.916 * DB saved on disk
+5079:M 07 Jul 2020 13:54:12.916 * Removing the pid file.
+5079:M 07 Jul 2020 13:54:12.916 # Redis is now ready to exit, bye bye...
+5127:S 07 Jul 2020 13:54:12.918 # Connection with master lost.
+5127:S 07 Jul 2020 13:54:12.918 * Caching the disconnected master state.
+[1]-  Done                    src/redis-server ./redis1.conf
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ 5127:S 07 Jul 2020 13:54:13.489 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:13.489 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:13.489 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:14.491 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:14.492 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:14.492 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:15.494 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:15.494 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:15.494 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:16.497 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:16.497 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:16.497 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:17.501 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:17.501 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:17.501 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:18.504 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:18.504 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:18.504 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:19.507 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:19.507 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:19.507 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:20.510 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:20.510 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:20.510 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:21.513 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:21.513 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:21.513 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:22.516 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:22.516 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:22.516 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:23.519 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:23.519 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:23.519 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:24.520 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:24.520 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:24.520 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:25.521 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:25.521 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:25.521 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:26.523 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:26.523 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:26.523 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:27.526 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:27.526 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:27.526 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:28.528 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:28.528 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:28.528 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:29.530 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:29.530 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:29.530 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:30.532 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:30.532 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:30.532 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:31.533 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:31.533 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:31.533 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:32.535 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:32.536 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:32.536 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:33.539 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:33.539 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:33.539 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:34.541 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:34.541 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:34.541 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:35.543 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:35.543 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:35.543 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:36.546 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:36.546 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:36.546 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:37.549 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:37.549 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:37.549 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:38.552 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:38.552 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:38.552 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:39.553 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:39.553 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:39.553 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:40.555 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:40.555 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:40.555 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:41.557 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:41.557 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:41.557 # Error condition on socket for SYNC: Connection refused
+5127:S 07 Jul 2020 13:54:42.559 * Connecting to MASTER 172.30.2.184:6379
+5127:S 07 Jul 2020 13:54:42.559 * MASTER <-> REPLICA sync started
+5127:S 07 Jul 2020 13:54:42.559 # Error condition on socket for SYNC: Connection refused
+5127:M 07 Jul 2020 13:54:43.253 # Setting secondary replication ID to 3871e09c446a3f35b3769590db628947ce5bf289, valid up to offset: 209636. New replication ID is 70ec6861980c543b98e9e01de4dae1bc48096d7e
+5127:M 07 Jul 2020 13:54:43.253 * Discarding previously cached master state.
+5127:M 07 Jul 2020 13:54:43.253 * MASTER MODE enabled (user request from 'id=3 addr=172.30.2.184:43790 fd=8 name=sentinel-9a727993-cmd age=273 idle=0 flags=x db=0 sub=0 psub=0 multi=3 qbuf=140 qbuf-free=32628 obl=36 oll=0 omem=0 events=r cmd=exec')
+5127:M 07 Jul 2020 13:54:43.254 # CONFIG REWRITE executed with success.
+5127:M 07 Jul 2020 13:54:44.467 * Replica 172.30.2.184:6381 asks for synchronization
+5127:M 07 Jul 2020 13:54:44.467 * Partial resynchronization request from 172.30.2.184:6381 accepted. Sending 440 bytes of backlog starting from offset 209636.
+
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6379 info replication
+Could not connect to Redis at 127.0.0.1:6379: Connection refused
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6381 info replication5127:M 07 Jul 2020 13:55:10.029 * 10 changes in 300 seconds. Saving...
+5127:M 07 Jul 2020 13:55:10.029 * Background saving started by pid 5247
+5247:C 07 Jul 2020 13:55:10.031 * DB saved on disk
+5247:C 07 Jul 2020 13:55:10.031 * RDB: 0 MB of memory used by copy-on-write
+5127:M 07 Jul 2020 13:55:10.130 * Background saving terminated with success
+0
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=172.30.2.184,port=6381,state=online,offset=213929,lag=1
+master_replid:70ec6861980c543b98e9e01de4dae1bc48096d7e
+master_replid2:3871e09c446a3f35b3769590db628947ce5bf289
+master_repl_offset:214207
+second_repl_offset:209636
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:177401
+repl_backlog_histlen:36807
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6380 info replication
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=172.30.2.184,port=6381,state=online,offset=214485,lag=0
+master_replid:70ec6861980c543b98e9e01de4dae1bc48096d7e
+master_replid2:3871e09c446a3f35b3769590db628947ce5bf289
+master_repl_offset:214485
+second_repl_offset:209636
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:177401
+repl_backlog_histlen:37085
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6379 info replication
+Could not connect to Redis at 127.0.0.1:6379: Connection refused
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6380 info replication
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=172.30.2.184,port=6381,state=online,offset=215074,lag=1
+master_replid:70ec6861980c543b98e9e01de4dae1bc48096d7e
+master_replid2:3871e09c446a3f35b3769590db628947ce5bf289
+master_repl_offset:215366
+second_repl_offset:209636
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:177401
+repl_backlog_histlen:37966
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$ src/redis-cli -p 6381 info replication
+# Replication
+role:slave
+master_host:172.30.2.184
+master_port:6380
+master_link_status:up
+master_last_io_seconds_ago:2
+master_sync_in_progress:0
+slave_repl_offset:215677
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:70ec6861980c543b98e9e01de4dae1bc48096d7e
+master_replid2:3871e09c446a3f35b3769590db628947ce5bf289
+master_repl_offset:215677
+second_repl_offset:209636
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1206
+repl_backlog_histlen:214472
+[ec2-user@ip-172-30-2-184 redis-5.0.8]$
+
+＜クライアントサイド＞
+[ec2-user@ip-172-30-2-184 ~]$ java -jar redisfailoversample2-0.0.1-SNAPSHOT.jar
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.1.RELEASE)
+
+2020-07-07 13:53:43.356  INFO 5223 --- [           main] c.e.d.Redisfailoversample2Application    : Starting Redisfailoversample2Application on ip-172-30-2-184.ap-northeast-1.compute.internal with PID 5223 (/home/ec2-user/redisfailoversample2-0.0.1-SNAPSHOT.jar started by ec2-user in /home/ec2-user)
+2020-07-07 13:53:43.363  INFO 5223 --- [           main] c.e.d.Redisfailoversample2Application    : No active profile set, falling back to default profiles: default
+2020-07-07 13:53:44.525  INFO 5223 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-07-07 13:53:44.532  INFO 5223 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-07-07 13:53:44.604  INFO 5223 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33ms. Found 0 Redis repository interfaces.
+2020-07-07 13:53:46.300  INFO 5223 --- [           main] c.e.d.Redisfailoversample2Application    : Started Redisfailoversample2Application in 4.043 seconds (JVM running for 5.236)
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+2020-07-07 13:54:13.028  INFO 5223 --- [xecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was /172.30.2.184:6379
+2020-07-07 13:54:13.053  WARN 5223 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:54:22.123  INFO 5223 --- [xecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was 172.30.2.184:6379
+2020-07-07 13:54:22.133  WARN 5223 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:54:30.423  INFO 5223 --- [xecutorLoop-1-2] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was 172.30.2.184:6379
+2020-07-07 13:54:30.430  WARN 5223 --- [ioEventLoop-6-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [172.30.2.184:6379]: Connection refused: /172.30.2.184:6379
+2020-07-07 13:54:46.823  INFO 5223 --- [xecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was 172.30.2.184:6379
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+2020-07-07 13:54:46.833  INFO 5223 --- [ioEventLoop-6-2] i.l.core.protocol.ReconnectionHandler    : Reconnected to 172.30.2.184:6380
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
+Connection timeout = 60000
+Command timeout = PT1M
+operation succeeded.
